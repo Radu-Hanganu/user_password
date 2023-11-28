@@ -1,0 +1,18 @@
+@Controller
+@RequestMapping("/recipes")
+public class RecipeController {
+    private final RecipeRepository recipeRepository;
+
+    public RecipeController(RecipeRepository recipeRepository) {
+        this.recipeRepository = recipeRepository;
+    }
+
+    @GetMapping
+    public String getAllRecipes(Model model) {
+        List<Recipe> recipes = recipeRepository.findAll();
+        model.addAttribute("recipes", recipes);
+        return "recipes"; // This will map to a Thymeleaf template named "recipes.html"
+    }
+
+    // Other methods for adding, editing, deleting recipes, etc.
+}
